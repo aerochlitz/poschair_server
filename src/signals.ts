@@ -2,6 +2,9 @@ import { OPEN } from 'ws';
 import { wss } from './app';
 import { } from './interfaces';
 
+// used for sending stuff to the front end
+// send to everyone connected
+
 const SIGNALS = {
     ERROR: 'error'
 }

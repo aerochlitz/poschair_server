@@ -26,7 +26,6 @@ wss.on(ENDPOINTS.CONNECT, (ws: WebSocket) => {
       case ENDPOINTS.REQUEST:
       const str: string = data.body;
       console.log(ENDPOINTS.REQUEST, str);
-      signals.error('Log an error');
       break;
 
       default:
