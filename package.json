@@ -19,10 +19,10 @@
   },
   "homepage": "https://github.com/GJGilles/FYDP_server#readme",
   "dependencies": {
-    "@types/node": "^10.12.18",
+    "@types/node": "^10.12.26",
     "@types/ws": "^6.0.1",
     "python-shell": "^1.0.7",
-    "typescript": "^3.2.4",
-    "ws": "^6.1.2"
+    "typescript": "^3.3.3",
+    "ws": "^6.1.3"
   }
 }

@@ -14,3 +14,14 @@ export interface SensorData {
   sBtmL: number;
   sBtmR: number;
 }
+
+export enum VibrationType {
+  short = "short",
+  long = "long",
+  beep = "beep"
+}
+
+export interface Settings {
+  vibrationType: VibrationType;
+  timeInterval: number;
+}

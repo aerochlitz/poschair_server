@@ -1,13 +1,14 @@
 import * as WebSocket from 'ws';
 import signals from './signals';
-import service from './service';
-import { Message } from './interfaces';
+import settings from './settings';
+import { Message, Settings } from './interfaces';
 
 // TODO: Check to see if the clients need tokens or if the server can handle multiple instances
 
 const ENDPOINTS = {
   CONNECT: 'connection',
-  REQUEST: 'request'
+  GET_SETTINGS: 'getSettings',
+  SET_SETTINGS: 'setSettings'
 };
 
 /// Functionality ///
@@ -23,14 +24,22 @@ wss.on(ENDPOINTS.CONNECT, (ws: WebSocket) => {
     let data: Message = JSON.parse(msg.data.toString());
 
     switch (data.key) {
-      case ENDPOINTS.REQUEST:
-      const str: string = data.body;
-      console.log(ENDPOINTS.REQUEST, str);
-      break;
+      case ENDPOINTS.GET_SETTINGS: {
+        console.log(ENDPOINTS.GET_SETTINGS);
+        ws.send(JSON.stringify({ key: ENDPOINTS.GET_SETTINGS, body: settings.getSettings() }));
+        break;
+      }
+
+      case ENDPOINTS.SET_SETTINGS: {
+        const smallSettings: Settings = data.body;
+        console.log(ENDPOINTS.SET_SETTINGS);
+        settings.setSettings(smallSettings);
+        break;
+      }
 
       default:
-      signals.error('Endpoint does not exist');
-      break;
+        signals.error('Endpoint does not exist');
+        break;
     }
 
     ws.send(JSON.stringify({ key: ENDPOINTS.CONNECT, body: {} }));
