@@ -5,7 +5,7 @@ class SettingsManager {
 
     private settings: Settings = {
         vibrationType: VibrationType.long,
-        timeInterval: 60000 //seconds
+        timeInterval: 60000 // 60 seconds
     };
 
     constructor() { }

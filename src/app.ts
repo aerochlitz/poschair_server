@@ -8,7 +8,10 @@ import { Message, Settings } from './interfaces';
 const ENDPOINTS = {
   CONNECT: 'connection',
   GET_SETTINGS: 'getSettings',
-  SET_SETTINGS: 'setSettings'
+  SET_SETTINGS: 'setSettings',
+  SNOOZE: 'snooze',
+  RECALIBRATE: 'recalibrate',
+  SHUTDOWN: 'shutdown'
 };
 
 /// Functionality ///
@@ -37,8 +40,27 @@ wss.on(ENDPOINTS.CONNECT, (ws: WebSocket) => {
         break;
       }
 
+      case ENDPOINTS.SNOOZE: {
+        // send snooze in script
+        console.log(ENDPOINTS.SNOOZE);
+        break;
+      }
+
+      case ENDPOINTS.RECALIBRATE: {
+        // send recalibrate command in script
+        console.log(ENDPOINTS.RECALIBRATE);
+        break;
+      }
+
+      case ENDPOINTS.SHUTDOWN: {
+        // send shutdown command in script
+        console.log(ENDPOINTS.SHUTDOWN);
+        break;
+      }
+
       default:
         signals.error('Endpoint does not exist');
+        console.log('Endpoint does not exist');
         break;
     }
 
