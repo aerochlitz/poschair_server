@@ -15,6 +15,11 @@ class ShellManager {
         // get stuff
     }
 
+    public sendMessage = (message: string) => {
+        // send snooze/recalibrate/shutdown message to script
+        console.log('Tried to send ' + message);
+    }
+
 }
 
 export default new ShellManager();

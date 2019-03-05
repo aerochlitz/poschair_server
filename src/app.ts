@@ -41,19 +41,19 @@ wss.on(ENDPOINTS.CONNECT, (ws: WebSocket) => {
       }
 
       case ENDPOINTS.SNOOZE: {
-        // send snooze in script
+        settings.setSnooze();
         console.log(ENDPOINTS.SNOOZE);
         break;
       }
 
       case ENDPOINTS.RECALIBRATE: {
-        // send recalibrate command in script
+        settings.setRecalibrate();
         console.log(ENDPOINTS.RECALIBRATE);
         break;
       }
 
       case ENDPOINTS.SHUTDOWN: {
-        // send shutdown command in script
+        settings.setShutdown();
         console.log(ENDPOINTS.SHUTDOWN);
         break;
       }
