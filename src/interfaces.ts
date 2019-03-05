@@ -16,9 +16,8 @@ export interface SensorData {
 }
 
 export enum VibrationType {
-  short = "short",
-  long = "long",
-  beep = "beep"
+  short = "Short",
+  long = "Long"
 }
 
 export interface Settings {

@@ -4,7 +4,7 @@ import shell from './shell';
 class SettingsManager {
 
     private settings: Settings = {
-        vibrationType: VibrationType.beep,
+        vibrationType: VibrationType.long,
         timeInterval: 60000 //seconds
     };
 
