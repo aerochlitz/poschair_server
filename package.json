@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "serve": "node dist/app.js",
+    "serve": "cd ./dist && node app.js",
     "start": "npm run build && npm run serve"
   },
   "repository": {

@@ -6,7 +6,8 @@ import { } from './interfaces';
 // send to everyone connected
 
 const SIGNALS = {
-    ERROR: 'error'
+    ERROR: 'error',
+    SENSOR_DATA: 'sensorData'
 }
 
 class SignalManager {
@@ -25,6 +26,10 @@ class SignalManager {
 
     public error = (error: string) => {
         this.send(SIGNALS.ERROR, error);
+    }
+
+    public sensorData = (sensorData: string) => {
+        this.send(SIGNALS.SENSOR_DATA, sensorData);
     }
 
 }
