@@ -12,23 +12,24 @@ class ShellManager {
         const shell = new PythonShell('../scripts/poschair.py', { pythonOptions: ['-u'] });
 
         shell.on('message', (message) => {
-            console.log(message);
-            signals.sensorData(message);
+            console.log('Read from python script: ' + message);
+            this.processMessage(message);
         });
     }
 
-
-    public setSettings = (settings: Settings) => {
-        // send stuff eventually
+    private processMessage = (gotMessage: string) => {
+        // right now, only getting sensor data
+        // probably will want to move interpreting inputs here from frontend
+        this.sendSensorData(gotMessage);
     }
 
-    public getSensorVals = () => {
-
+    private sendSensorData = (sensorData: string) => {
+        signals.sensorData(sensorData);
     }
 
     public sendMessage = (message: string) => {
         // send snooze/recalibrate/shutdown message to script
-        console.log('Tried to send ' + message);
+        console.log('Send to python script: ' + message);
         this.myShell.send(message);
     }
 

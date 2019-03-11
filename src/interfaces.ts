@@ -21,7 +21,5 @@ export enum VibrationType {
 }
 
 export interface Settings {
-  vibrationType: VibrationType;
   timeInterval: number;
-  isSnoozed: boolean;
 }

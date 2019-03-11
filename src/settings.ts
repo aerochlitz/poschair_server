@@ -4,40 +4,30 @@ import shell from './shell';
 class SettingsManager {
 
     private settings: Settings = {
-        vibrationType: VibrationType.long,
-        timeInterval: 60000, // 60 seconds
-        isSnoozed: false
+        timeInterval: 15, // seconds
     };
 
     constructor() { }
 
-    public setSettings = (settings: Settings) => {
-        this.settings = settings;
-        shell.setSettings(settings);
+    public setInterval = (interval: number) => {
+        this.settings.timeInterval = interval;
+        shell.sendMessage("5"+interval);
     }
 
-    public getSettings = () => {
-        return this.settings;
+    public getInterval = () => {
+        return this.settings.timeInterval;
     }
 
-    public setSnooze = () => {
-        if (this.settings.isSnoozed) {
-            shell.sendMessage("unsnooze");
-            // if success?
-            this.settings.isSnoozed = false;
-        } else {
-            shell.sendMessage("snooze");
-            // if success?
-            this.settings.isSnoozed = true;
-        }
+    public setSnooze = (snoozeTime: number) => {
+        shell.sendMessage("4"+snoozeTime);
     }
 
     public setRecalibrate = () => {
-        shell.sendMessage("recalibrate");
+        shell.sendMessage("2");
     }
 
     public setShutdown = () => {
-        shell.sendMessage("shutdown");
+        shell.sendMessage("1");
     }
 
 }

@@ -7,8 +7,8 @@ import { Message, Settings } from './interfaces';
 
 const ENDPOINTS = {
   CONNECT: 'connection',
-  GET_SETTINGS: 'getSettings',
-  SET_SETTINGS: 'setSettings',
+  GET_INTERVAL: 'getInterval',
+  SET_INTERVAL: 'setInterval',
   SNOOZE: 'snooze',
   RECALIBRATE: 'recalibrate',
   SHUTDOWN: 'shutdown'
@@ -27,22 +27,23 @@ wss.on(ENDPOINTS.CONNECT, (ws: WebSocket) => {
     let data: Message = JSON.parse(msg.data.toString());
 
     switch (data.key) {
-      case ENDPOINTS.GET_SETTINGS: {
-        console.log(ENDPOINTS.GET_SETTINGS);
-        ws.send(JSON.stringify({ key: ENDPOINTS.GET_SETTINGS, body: settings.getSettings() }));
+      case ENDPOINTS.GET_INTERVAL: {
+        console.log(ENDPOINTS.GET_INTERVAL);
+        ws.send(JSON.stringify({ key: ENDPOINTS.GET_INTERVAL, body: settings.getInterval() }));
         break;
       }
 
-      case ENDPOINTS.SET_SETTINGS: {
-        const smallSettings: Settings = data.body;
-        console.log(ENDPOINTS.SET_SETTINGS);
-        settings.setSettings(smallSettings);
+      case ENDPOINTS.SET_INTERVAL: {
+        const newInterval: number = data.body;
+        console.log(ENDPOINTS.SET_INTERVAL + newInterval);
+        settings.setInterval(newInterval);
         break;
       }
 
       case ENDPOINTS.SNOOZE: {
-        settings.setSnooze();
-        console.log(ENDPOINTS.SNOOZE);
+        const snoozeTime: number = data.body;
+        console.log(ENDPOINTS.SNOOZE + snoozeTime);
+        settings.setSnooze(snoozeTime);
         break;
       }
 
