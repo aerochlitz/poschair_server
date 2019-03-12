@@ -9,7 +9,9 @@ class ShellManager {
     constructor() { 
         console.log('Shell constructor');
         
-        const shell = new PythonShell('../scripts/poschair.py', { pythonOptions: ['-u'] });
+        // const shell = new PythonShell('../scripts/poschair.py', { pythonOptions: ['-u'] });
+        const shell = new PythonShell('../scripts/main.py', { pythonOptions: ['-u'] });
+
 
         shell.on('message', (message) => {
             console.log('Read from python script: ' + message);
