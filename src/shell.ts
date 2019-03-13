@@ -4,25 +4,30 @@ import signals from './signals';
 
 class ShellManager {
 
-    private myShell = new PythonShell('../scripts/poschair.py');
+    // private myShell = new PythonShell('../scripts/poschair.py', { pythonOptions: ['-u'] });
+    private myShell = new PythonShell('../scripts/main.py', { pythonOptions: ['-u'] });
 
     constructor() { 
-        console.log('Shell constructor');
-        
-        // const shell = new PythonShell('../scripts/poschair.py', { pythonOptions: ['-u'] });
-        const shell = new PythonShell('../scripts/main.py', { pythonOptions: ['-u'] });
-
-
-        shell.on('message', (message) => {
+        this.myShell.on('message', (message) => {
             console.log('Read from python script: ' + message);
             this.processMessage(message);
         });
     }
 
     private processMessage = (gotMessage: string) => {
-        // right now, only getting sensor data
-        // probably will want to move interpreting inputs here from frontend
-        this.sendSensorData(gotMessage);
+        // check first 4 chars of message to decide how to handle
+        var type = gotMessage.slice(0,4);
+        if (type == "Done") {
+            // unfreeze UI
+            signals.sendDone();
+        } else if (type == "Data") {
+            var sendMessage = gotMessage.slice(5);
+            this.sendSensorData(sendMessage);
+        } else {
+            // maybe error handling will be a thing one day
+        }
+
+        // this.sendSensorData(gotMessage);
     }
 
     private sendSensorData = (sensorData: string) => {

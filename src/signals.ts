@@ -7,7 +7,8 @@ import { } from './interfaces';
 
 const SIGNALS = {
     ERROR: 'error',
-    SENSOR_DATA: 'sensorData'
+    SENSOR_DATA: 'sensorData',
+    DONE: 'done'
 }
 
 class SignalManager {
@@ -30,6 +31,10 @@ class SignalManager {
 
     public sensorData = (sensorData: string) => {
         this.send(SIGNALS.SENSOR_DATA, sensorData);
+    }
+
+    public sendDone = () => {
+        this.send(SIGNALS.DONE, "done");
     }
 
 }

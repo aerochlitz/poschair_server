@@ -281,7 +281,7 @@ def evaluatePosture(seat_averageForce, back_averageForce):
     logdata.append(' Good sensors: ' + str(goodSensors))
 
     # Send to web app sensor results
-    print(str(goodSensors))
+    print("Data " + str(goodSensors) + " some words")
 
     # TODO: Utilise postureCases functions - see code from test_postureCases.py
     # ttg: Only sends numbers above or below 0 to indicate out of bound values

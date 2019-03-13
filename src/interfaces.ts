@@ -13,6 +13,7 @@ export interface SensorData {
   sTopR: number;
   sBtmL: number;
   sBtmR: number;
+  words: string;
 }
 
 export enum VibrationType {
