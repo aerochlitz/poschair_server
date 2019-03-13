@@ -28,7 +28,7 @@ def main():
     global seat_tolPercent
     seat_refForce = [0.0, 0.0, 0.0, 0.0]
     seat_tolForce = [2, 2, 2, 2]            # dummy values
-    seat_tolPercent = [0.10, 0.07, 0.15, 0.15]
+    seat_tolPercent = [0.10, 0.05, 0.15, 0.15]
 
     global back_refForce
     global back_tolForce
@@ -149,8 +149,8 @@ def readSensorData():
                     back_tolForce[i] = back_tolPercent[i] * back_refForce[i]
 
                 # Forces the headrest tolerance to be a fixed value
-                back_tolForce[0] = 0.5
-                back_tolForce[1] = 0.5
+                back_tolForce[0] = 0.4
+                back_tolForce[1] = 0.4
 
                 recalibrate = False
 
@@ -280,9 +280,6 @@ def evaluatePosture(seat_averageForce, back_averageForce):
 
     logdata.append(' Good sensors: ' + str(goodSensors))
 
-    # Send to web app sensor results
-    print("Data " + str(goodSensors) + " some words")
-
     # TODO: Utilise postureCases functions - see code from test_postureCases.py
     # ttg: Only sends numbers above or below 0 to indicate out of bound values
     FR = seat_relative[0] if goodSensors[0] == 0 else 0
@@ -301,13 +298,16 @@ def evaluatePosture(seat_averageForce, back_averageForce):
     logdata.append(' seat_tolForce is set to: ' + str(seat_tolForce))
     logdata.append(' back_tolForce is set to: ' + str(back_tolForce))
 
-    if correctUpright(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Correct upright'
-    elif leanForward(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Lean forwards'
-    elif leanBackward(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Lean backwards'
-    elif leanLeft(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Lean left'
-    elif leanRight(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Lean right'
+    if correctUpright(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Correct posture'
+    elif leanForward(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Leaning forwards'
+    elif leanBackward(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Leaning backwards'
+    elif leanLeft(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Leaning left'
+    elif leanRight(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Leaning right'
     elif sitForwards(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Sitting Forward'
     else: evalResult = 'Posture not characterized'
+
+    # Send to web app sensor results
+    print('Data ' + str(goodSensors) + ' ' + evalResult)
 
     logdata.append(' Current posture: ' + evalResult)
 
@@ -328,6 +328,8 @@ def handleUserInput():
         # ttg: Do shutdown sequence
 
         # > Shutting down...
+        print(str([2, 2, 2, 2, 2, 2, 2, 2]))
+
         programRunning = False
         time.sleep(2)   # waits 2 seconds, before shutting down RPi
         sys.exit()      # exits off program, for now,,,
@@ -339,6 +341,8 @@ def handleUserInput():
 
     elif option is '4':
         # ttg: Snooze program
+        print(str([2, 2, 2, 2, 2, 2, 2, 2]))
+
         snooze = True
         value = int(cmd[1:])
 
