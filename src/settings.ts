@@ -4,7 +4,7 @@ import shell from './shell';
 class SettingsManager {
 
     private settings: Settings = {
-        timeInterval: 15, // seconds
+        timeInterval: 10, // seconds
     };
 
     constructor() { }
