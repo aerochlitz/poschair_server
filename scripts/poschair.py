@@ -3,8 +3,7 @@ import time
 import sys
 
 def readInput():
-    # message = input()
-    message = sys.stdin.readline()
+    message = input()
 
     if message is not '':
         print('Got input: ' + message)

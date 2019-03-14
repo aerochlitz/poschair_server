@@ -2,6 +2,7 @@ import * as WebSocket from 'ws';
 import signals from './signals';
 import settings from './settings';
 import { Message, Settings } from './interfaces';
+import shell from './shell';
 
 // TODO: Check to see if the clients need tokens or if the server can handle multiple instances
 
@@ -11,7 +12,8 @@ const ENDPOINTS = {
   SET_INTERVAL: 'setInterval',
   SNOOZE: 'snooze',
   RECALIBRATE: 'recalibrate',
-  SHUTDOWN: 'shutdown'
+  SHUTDOWN: 'shutdown',
+  RERUN_SCRIPT: 'rerunScript'
 };
 
 /// Functionality ///
@@ -56,6 +58,12 @@ wss.on(ENDPOINTS.CONNECT, (ws: WebSocket) => {
       case ENDPOINTS.SHUTDOWN: {
         settings.setShutdown();
         console.log(ENDPOINTS.SHUTDOWN);
+        break;
+      }
+
+      case ENDPOINTS.RERUN_SCRIPT: {
+        shell.restartScript();
+        console.log(ENDPOINTS.RERUN_SCRIPT);
         break;
       }
 
