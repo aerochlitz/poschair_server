@@ -8,11 +8,12 @@ class ShellManager {
     private myShell = new PythonShell('../scripts/main.py', { pythonOptions: ['-u'] });
 
     constructor() { 
-        this.registerForMessages(this.myShell);
+        this.registerForMessages();
     }
 
-    private registerForMessages = (shell: PythonShell) => {
-        shell.on('message', (message) => {
+    private registerForMessages = () => {
+        console.log('PyShell: registered script for messages');
+        this.myShell.on('message', (message) => {
             console.log('Read from python script: ' + message);
             this.processMessage(message);
         });
@@ -27,6 +28,8 @@ class ShellManager {
         } else if (type == "Data") {
             var sendMessage = gotMessage.slice(5);
             this.sendSensorData(sendMessage);
+        } else if (type == "Hewo") {
+            signals.scriptReady();
         } else {
             // maybe error handling will be a thing one day
         }
@@ -46,8 +49,10 @@ class ShellManager {
 
     public restartScript = () => {
         this.myShell.terminate();
-        const newShell = new PythonShell('../scripts/poschair.py', { pythonOptions: ['-u'] });
-        this.registerForMessages(newShell);
+        console.log('PyShell: terminate old script');
+        this.sendSensorData("[2, 2, 2, 2, 2, 2, 2, 2] Restarting script");
+        this.myShell = new PythonShell('../scripts/main.py', { pythonOptions: ['-u'] });
+        this.registerForMessages();
     }
 
 }

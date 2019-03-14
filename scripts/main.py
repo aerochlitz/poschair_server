@@ -60,6 +60,8 @@ def main():
     wait.start()
     read.start()
 
+    print('Hewo')
+
     # ttg: Check if program is running every second, and spawn new userInput thread whenever one has already completed
     while programRunning:
         if not wait.isAlive():
@@ -304,7 +306,7 @@ def evaluatePosture(seat_averageForce, back_averageForce):
     elif leanLeft(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Leaning left'
     elif leanRight(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Leaning right'
     elif sitForwards(FR, FL, BR, BL, UL, UR, LL, LR): evalResult = 'Sitting Forward'
-    else: evalResult = 'Posture not characterized'
+    else: evalResult = 'Incorrect posture'
 
     # Send to web app sensor results
     print('Data ' + str(goodSensors) + ' ' + evalResult)
