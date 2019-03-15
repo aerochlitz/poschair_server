@@ -3,8 +3,8 @@ import serial
 import sys
 import datetime
 
-#from postureCases import *
-from postureCases4Laptop import *
+from postureCases import *
+#from postureCases4Laptop import *
 
 def main():
 
@@ -48,8 +48,8 @@ def main():
 
     # ttg: [ Setup ]
     global arduino
-    #arduino = serial.Serial('/dev/ttyACM0', 9600)
-    arduino = serial.Serial('COM3', 9600)
+    arduino = serial.Serial('/dev/ttyACM0', 9600)
+    #arduino = serial.Serial('COM3', 9600)
     time.sleep(3)
 
     #  > Running main function now...
